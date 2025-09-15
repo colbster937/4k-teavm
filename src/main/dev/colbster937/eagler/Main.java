@@ -4,7 +4,6 @@ import org.teavm.jso.browser.Window;
 import org.teavm.jso.canvas.CanvasRenderingContext2D;
 import org.teavm.jso.dom.html.HTMLCanvasElement;
 import org.teavm.jso.dom.html.HTMLElement;
-
 import org.teavm.jso.dom.html.HTMLDocument;
 import org.teavm.jso.dom.events.KeyboardEvent;
 import org.teavm.jso.dom.events.Event;
@@ -48,7 +47,6 @@ public class Main {
 
     game = new M(canvas, ctx);
     game.start();
-
 
     Util.setSmoothing(ctx, false);
     canvas.setTabIndex(0);
