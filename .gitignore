@@ -1,0 +1,9 @@
+.DS_Store
+.gradle
+build
+bin
+gradle
+gradlew
+gradlew.bat
+javascript/classes*
+javascript/js
