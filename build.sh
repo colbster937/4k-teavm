@@ -1,2 +1,2 @@
 chmod +x gradlew
-./gradlew generateJavacript
+./gradlew :target_teavm_javascript:generateJavaScript

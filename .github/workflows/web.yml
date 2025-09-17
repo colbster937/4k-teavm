@@ -48,7 +48,7 @@ jobs:
         run: |
           mkdir dist
           zip -r dist/javascript.zip javascript
-          cp javascript/offline.html dist/Minecraft4k.html
+          cp javascript/Minecraft4k.html dist/Minecraft4k.html
 
       - name: Get short commit hash
         id: vars

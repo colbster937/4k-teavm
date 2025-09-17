@@ -9,14 +9,17 @@ import org.teavm.jso.dom.events.KeyboardEvent;
 import org.teavm.jso.dom.events.Event;
 import org.teavm.jso.dom.events.MouseEvent;
 
+import dev.colbster937.render.Canvas;
+import dev.colbster937.render.RenderContext;
+
 import m4k.M;
 
 public class Main {
   private static M game;
   private static Window window;
   private static HTMLDocument doc;
-  private static HTMLCanvasElement canvas;
-  private static CanvasRenderingContext2D ctx;
+  private static Canvas canvas;
+  private static RenderContext ctx;
   private static int w;
   private static int h;
   
@@ -38,12 +41,12 @@ public class Main {
       node.removeAttribute("id");
       createCanvas(node);
     } else {
-      canvas = (HTMLCanvasElement) node;
+      canvas = (Canvas) node;
       canvas.setWidth(w);
       canvas.setHeight(h);
     }
 
-    ctx = (CanvasRenderingContext2D) canvas.getContext("2d");
+    ctx = (RenderContext) canvas.getContext("2d");
 
     game = new M(canvas, ctx);
     game.start();
@@ -152,7 +155,7 @@ public class Main {
   }
 
   private static void createCanvas(HTMLElement parent) {
-    canvas = (HTMLCanvasElement) doc.createElement("canvas");
+    canvas = (Canvas) doc.createElement("canvas");
     canvas.setId(id);
     canvas.setWidth(w);
     canvas.setHeight(h);

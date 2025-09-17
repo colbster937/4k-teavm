@@ -1,0 +1,1 @@
+include("target_teavm_javascript")
