@@ -29,26 +29,22 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Create gradle wrapper
-        run: gradle wrapper
-            
-      - name: Make Gradle wrapper executable
-        run: chmod +x gradlew
-        
       - name: Build client
-        run: ./gradlew :target_teavm_javascript:generateJavaScript
+        run: |
+          cd target_teavm_javascript
+          ./CompileJS.sh
 
       - name: Upload JavaScript build
         uses: actions/upload-artifact@v4.6.2
         with:
           name: javascript
-          path: javascript
+          path: target_teavm_javascript/javascript
 
       - name: Archive build
         run: |
           mkdir dist
-          zip -r dist/javascript.zip javascript
-          cp javascript/Minecraft4k.html dist/Minecraft4k.html
+          zip -r dist/javascript.zip target_teavm_javascript/javascript
+          cp target_teavm_javascript/javascript/Minecraft4k.html dist/Minecraft4k.html
 
       - name: Get short commit hash
         id: vars
@@ -68,5 +64,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: javascript
+          publish_dir: target_teavm_javascript/javascript
           publish_branch: gh-pages

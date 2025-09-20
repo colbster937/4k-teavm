@@ -1,7 +1,6 @@
 package dev.colbster937.eagler;
 
 import org.teavm.jso.browser.Window;
-import org.teavm.jso.canvas.CanvasRenderingContext2D;
 import org.teavm.jso.dom.html.HTMLCanvasElement;
 import org.teavm.jso.dom.html.HTMLElement;
 import org.teavm.jso.dom.html.HTMLDocument;
@@ -24,8 +23,6 @@ public class Main {
   private static int h;
   
   private static String id = "game_frame";
-  private static int lx = 0;
-  private static int ly = 0;
 
   public static void main(String[] args) {
     window = Window.current();
@@ -78,22 +75,7 @@ public class Main {
     });
 
     canvas.addEventListener("mousemove", (MouseEvent e) -> {
-      int[] p;
-      if (doc.getPointerLockElement() == canvas) {
-        lx += e.getMovementX();
-        ly += e.getMovementY();
-
-        if (lx < 0) lx = 0;
-        if (ly < 0) ly = 0;
-        if (lx > canvas.getWidth()) lx = canvas.getWidth();
-        if (ly > canvas.getHeight()) ly = canvas.getHeight();
-
-        p = new int[] { lx, ly };
-      } else {
-        p = Util.scaleMouse(canvas, e);
-        lx = p[0];
-        ly = p[1];
-      }
+      int[] p = Util.scaleMouse(canvas, e);
       AwtEvent ev = new AwtEvent();
       ev.id = 503;
       ev.x = p[0];
@@ -115,15 +97,6 @@ public class Main {
       AwtEvent ev = new AwtEvent();
       ev.id = 401;
       int code = e.getKeyCode();
-      if (code == 76 || code == 108) {
-        if (doc.getPointerLockElement() == canvas) {
-          doc.exitPointerLock();
-        } else {
-          canvas.requestPointerLock();
-        }
-        e.preventDefault();
-        return;
-      }
       if (code >= 65 && code <= 90) code += 32;
       ev.key = code;
       game.handleEvent(ev);

@@ -11,7 +11,7 @@ public class M extends Applet implements Runnable {
    public M(dev.colbster937.render.Canvas canvas, dev.colbster937.render.RenderContext ctx) {
       super(canvas, ctx);
    }
-
+   
    private int[] M = new int[32767];
 
    @Override
@@ -22,347 +22,347 @@ public class M extends Applet implements Runnable {
    @Override
    public void run() {
       try {
-         Random localRandom = new Random();
-         BufferedImage localBufferedImage = new BufferedImage(214, 120, 1);
-         int[] arrayOfInt1 = ((DataBufferInt)localBufferedImage.getRaster().getDataBuffer()).getData();
-         int[] arrayOfInt2 = new int[262144];
-         localRandom.setSeed(18295169L);
+         Random var1 = new Random();
+         BufferedImage var2 = new BufferedImage(214, 120, 1);
+         int[] var3 = ((DataBufferInt)var2.getRaster().getDataBuffer()).getData();
+         int[] var4 = new int[262144];
+         var1.setSeed(18295169L);
 
-         for (int i = 0; i < 262144; i++) {
-            arrayOfInt2[i] = i / 64 % 64 > 32 + localRandom.nextInt(8) ? localRandom.nextInt(8) + 1 : 0;
+         for (int var5 = 0; var5 < 262144; var5++) {
+            var4[var5] = var5 / 64 % 64 > 32 + var1.nextInt(8) ? var1.nextInt(8) + 1 : 0;
          }
 
-         int[] arrayOfInt3 = new int[12288];
+         int[] var57 = new int[12288];
 
-         for (int j = 1; j < 16; j++) {
-            int k = 255 - localRandom.nextInt(96);
+         for (int var6 = 1; var6 < 16; var6++) {
+            int var7 = 255 - var1.nextInt(96);
 
-            for (int m = 0; m < 48; m++) {
-               for (int n = 0; n < 16; n++) {
-                  int i1 = 9858122;
-                  if (j == 4) {
-                     i1 = 8355711;
+            for (int var8 = 0; var8 < 48; var8++) {
+               for (int var9 = 0; var9 < 16; var9++) {
+                  int var10 = 9858122;
+                  if (var6 == 4) {
+                     var10 = 8355711;
                   }
 
-                  if (j != 4 || localRandom.nextInt(3) == 0) {
-                     k = 255 - localRandom.nextInt(96);
+                  if (var6 != 4 || var1.nextInt(3) == 0) {
+                     var7 = 255 - var1.nextInt(96);
                   }
 
-                  if (j == 1 && m < (n * n * 3 + n * 81 >> 2 & 3) + 18) {
-                     i1 = 6990400;
-                  } else if (j == 1 && m < (n * n * 3 + n * 81 >> 2 & 3) + 19) {
-                     k = k * 2 / 3;
+                  if (var6 == 1 && var8 < (var9 * var9 * 3 + var9 * 81 >> 2 & 3) + 18) {
+                     var10 = 6990400;
+                  } else if (var6 == 1 && var8 < (var9 * var9 * 3 + var9 * 81 >> 2 & 3) + 19) {
+                     var7 = var7 * 2 / 3;
                   }
 
-                  if (j == 7) {
-                     i1 = 6771249;
-                     if (n > 0 && n < 15 && (m > 0 && m < 15 || m > 32 && m < 47)) {
-                        i1 = 12359778;
-                        int i2 = n - 7;
-                        int i3 = (m & 15) - 7;
-                        if (i2 < 0) {
-                           i2 = 1 - i2;
+                  if (var6 == 7) {
+                     var10 = 6771249;
+                     if (var9 > 0 && var9 < 15 && (var8 > 0 && var8 < 15 || var8 > 32 && var8 < 47)) {
+                        var10 = 12359778;
+                        int var11 = var9 - 7;
+                        int var12 = (var8 & 15) - 7;
+                        if (var11 < 0) {
+                           var11 = 1 - var11;
                         }
 
-                        if (i3 < 0) {
-                           i3 = 1 - i3;
+                        if (var12 < 0) {
+                           var12 = 1 - var12;
                         }
 
-                        if (i3 > i2) {
-                           i2 = i3;
+                        if (var12 > var11) {
+                           var11 = var12;
                         }
 
-                        k = 196 - localRandom.nextInt(32) + i2 % 3 * 32;
-                     } else if (localRandom.nextInt(2) == 0) {
-                        k = k * (150 - (n & 1) * 100) / 100;
+                        var7 = 196 - var1.nextInt(32) + var11 % 3 * 32;
+                     } else if (var1.nextInt(2) == 0) {
+                        var7 = var7 * (150 - (var9 & 1) * 100) / 100;
                      }
                   }
 
-                  if (j == 5) {
-                     i1 = 11876885;
-                     if ((n + m / 4 * 4) % 8 == 0 || m % 4 == 0) {
-                        i1 = 12365733;
+                  if (var6 == 5) {
+                     var10 = 11876885;
+                     if ((var9 + var8 / 4 * 4) % 8 == 0 || var8 % 4 == 0) {
+                        var10 = 12365733;
                      }
                   }
 
-                  int i2x = k;
-                  if (m >= 32) {
-                     i2x = k / 2;
+                  int var65 = var7;
+                  if (var8 >= 32) {
+                     var65 = var7 / 2;
                   }
 
-                  if (j == 8) {
-                     i1 = 5298487;
-                     if (localRandom.nextInt(2) == 0) {
-                        i1 = 0;
-                        i2x = 255;
+                  if (var6 == 8) {
+                     var10 = 5298487;
+                     if (var1.nextInt(2) == 0) {
+                        var10 = 0;
+                        var65 = 255;
                      }
                   }
 
-                  int i3x = (i1 >> 16 & 0xFF) * i2x / 255 << 16 | (i1 >> 8 & 0xFF) * i2x / 255 << 8 | (i1 & 0xFF) * i2x / 255;
-                  arrayOfInt3[n + m * 16 + j * 256 * 3] = i3x;
+                  int var68 = (var10 >> 16 & 0xFF) * var65 / 255 << 16 | (var10 >> 8 & 0xFF) * var65 / 255 << 8 | (var10 & 0xFF) * var65 / 255;
+                  var57[var9 + var8 * 16 + var6 * 256 * 3] = var68;
                }
             }
          }
 
-         float f1 = 96.5F;
-         float f2 = 65.0F;
-         float f3 = 96.5F;
-         float f4 = 0.0F;
-         float f5 = 0.0F;
-         float f6 = 0.0F;
-         long l = System.currentTimeMillis();
-         int i4 = -1;
-         int i5 = 0;
-         float f7 = 0.0F;
-         float f8 = 0.0F;
+         float var58 = 96.5F;
+         float var59 = 65.0F;
+         float var60 = 96.5F;
+         float var61 = 0.0F;
+         float var63 = 0.0F;
+         float var66 = 0.0F;
+         long var69 = System.currentTimeMillis();
+         int var14 = -1;
+         int var15 = 0;
+         float var16 = 0.0F;
+         float var17 = 0.0F;
 
          while (true) {
-            float f9 = (float)Math.sin(f7);
-            float f10 = (float)Math.cos(f7);
-            float f11 = (float)Math.sin(f8);
-            float f12 = (float)Math.cos(f8);
+            float var18 = (float)Math.sin(var16);
+            float var19 = (float)Math.cos(var16);
+            float var20 = (float)Math.sin(var17);
+            float var21 = (float)Math.cos(var17);
 
-            label266:
-            while (System.currentTimeMillis() - l > 10L) {
+            while (System.currentTimeMillis() - var69 > 10L) {
                if (this.M[2] > 0) {
-                  float f13 = (this.M[2] - 428) / 214.0F * 2.0F;
-                  float f14 = (this.M[3] - 240) / 120.0F * 2.0F;
-                  float f15 = (float)Math.sqrt(f13 * f13 + f14 * f14) - 1.2F;
-                  if (f15 < 0.0F) {
-                     f15 = 0.0F;
+                  float var22 = (this.M[2] - 428) / 214.0F * 2.0F;
+                  float var23 = (this.M[3] - 240) / 120.0F * 2.0F;
+                  float var24 = (float)Math.sqrt(var22 * var22 + var23 * var23) - 1.2F;
+                  if (var24 < 0.0F) {
+                     var24 = 0.0F;
                   }
 
-                  if (f15 > 0.0F) {
-                     f7 += f13 * f15 / 400.0F;
-                     f8 -= f14 * f15 / 400.0F;
-                     if (f8 < -1.57F) {
-                        f8 = -1.57F;
+                  if (var24 > 0.0F) {
+                     var16 += var22 * var24 / 400.0F;
+                     var17 -= var23 * var24 / 400.0F;
+                     if (var17 < -1.57F) {
+                        var17 = -1.57F;
                      }
 
-                     if (f8 > 1.57F) {
-                        f8 = 1.57F;
+                     if (var17 > 1.57F) {
+                        var17 = 1.57F;
                      }
                   }
                }
 
-               l += 10L;
-               float f13x = 0.0F;
-               float f14x = 0.0F;
-               f14x += (this.M[119] - this.M[115]) * 0.02F;
-               f13x += (this.M[100] - this.M[97]) * 0.02F;
-               f4 *= 0.5F;
-               f5 *= 0.99F;
-               f6 *= 0.5F;
-               f4 += f9 * f14x + f10 * f13x;
-               f6 += f10 * f14x - f9 * f13x;
-               f5 += 0.003F;
+               var69 += 10L;
+               float var71 = 0.0F;
+               float var75 = 0.0F;
+               var75 += (this.M[119] - this.M[115]) * 0.02F;
+               var71 += (this.M[100] - this.M[97]) * 0.02F;
+               var61 *= 0.5F;
+               var63 *= 0.99F;
+               var66 *= 0.5F;
+               var61 += var18 * var75 + var19 * var71;
+               var66 += var19 * var75 - var18 * var71;
+               var63 += 0.003F;
 
-               for (int i8 = 0; i8 < 3; i8++) {
-                  float f16 = f1 + f4 * ((i8 + 0) % 3 / 2);
-                  float f17 = f2 + f5 * ((i8 + 1) % 3 / 2);
-                  float f19 = f3 + f6 * ((i8 + 2) % 3 / 2);
+               label265:
+               for (int var79 = 0; var79 < 3; var79++) {
+                  float var25 = var58 + var61 * ((var79 + 0) % 3 / 2);
+                  float var26 = var59 + var63 * ((var79 + 1) % 3 / 2);
+                  float var27 = var60 + var66 * ((var79 + 2) % 3 / 2);
 
-                  for (int i12 = 0; i12 < 12; i12++) {
-                     int i13 = (int)(f16 + (i12 >> 0 & 1) * 0.6F - 0.3F) - 64;
-                     int i14 = (int)(f17 + ((i12 >> 2) - 1) * 0.8F + 0.65F) - 64;
-                     int i15 = (int)(f19 + (i12 >> 1 & 1) * 0.6F - 0.3F) - 64;
-                     if (i13 < 0 || i14 < 0 || i15 < 0 || i13 >= 64 || i14 >= 64 || i15 >= 64 || arrayOfInt2[i13 + i14 * 64 + i15 * 4096] > 0) {
-                        if (i8 == 1) {
-                           if (this.M[32] > 0 && f5 > 0.0F) {
+                  for (int var28 = 0; var28 < 12; var28++) {
+                     int var29 = (int)(var25 + (var28 >> 0 & 1) * 0.6F - 0.3F) - 64;
+                     int var30 = (int)(var26 + ((var28 >> 2) - 1) * 0.8F + 0.65F) - 64;
+                     int var31 = (int)(var27 + (var28 >> 1 & 1) * 0.6F - 0.3F) - 64;
+                     if (var29 < 0 || var30 < 0 || var31 < 0 || var29 >= 64 || var30 >= 64 || var31 >= 64 || var4[var29 + var30 * 64 + var31 * 4096] > 0) {
+                        if (var79 == 1) {
+                           if (this.M[32] > 0 && var63 > 0.0F) {
                               this.M[32] = 0;
-                              f5 = -0.1F;
+                              var63 = -0.1F;
                            } else {
-                              f5 = 0.0F;
+                              var63 = 0.0F;
                            }
                         }
-                        continue label266;
+                        continue label265;
                      }
                   }
 
-                  f1 = f16;
-                  f2 = f17;
-                  f3 = f19;
+                  var58 = var25;
+                  var59 = var26;
+                  var60 = var27;
                }
             }
 
-            int i6 = 0;
-            int i7 = 0;
-            if (this.M[1] > 0 && i4 > 0) {
-               arrayOfInt2[i4] = 0;
+            int var73 = 0;
+            int var77 = 0;
+            if (this.M[1] > 0 && var14 > 0) {
+               var4[var14] = 0;
                this.M[1] = 0;
             }
 
-            if (this.M[0] > 0 && i4 > 0) {
-               arrayOfInt2[i4 + i5] = 1;
+            if (this.M[0] > 0 && var14 > 0) {
+               var4[var14 + var15] = 1;
                this.M[0] = 0;
             }
 
-            for (int i8 = 0; i8 < 12; i8++) {
-               int i9 = (int)(f1 + (i8 >> 0 & 1) * 0.6F - 0.3F) - 64;
-               int i10 = (int)(f2 + ((i8 >> 2) - 1) * 0.8F + 0.65F) - 64;
-               int i11 = (int)(f3 + (i8 >> 1 & 1) * 0.6F - 0.3F) - 64;
-               if (i9 >= 0 && i10 >= 0 && i11 >= 0 && i9 < 64 && i10 < 64 && i11 < 64) {
-                  arrayOfInt2[i9 + i10 * 64 + i11 * 4096] = 0;
+            for (int var80 = 0; var80 < 12; var80++) {
+               int var82 = (int)(var58 + (var80 >> 0 & 1) * 0.6F - 0.3F) - 64;
+               int var84 = (int)(var59 + ((var80 >> 2) - 1) * 0.8F + 0.65F) - 64;
+               int var86 = (int)(var60 + (var80 >> 1 & 1) * 0.6F - 0.3F) - 64;
+               if (var82 >= 0 && var84 >= 0 && var86 >= 0 && var82 < 64 && var84 < 64 && var86 < 64) {
+                  var4[var82 + var84 * 64 + var86 * 4096] = 0;
                }
             }
 
-            float i8x = -1.0F;
+            int var81 = -1;
 
-            for (int i9 = 0; i9 < 214; i9++) {
-               float f18 = (i9 - 107) / 90.0F;
+            for (int var83 = 0; var83 < 214; var83++) {
+               float var85 = (var83 - 107) / 90.0F;
 
-               for (int i11 = 0; i11 < 120; i11++) {
-                  float f20 = (i11 - 60) / 90.0F;
-                  float f21 = 1.0F;
-                  float f22 = f21 * f12 + f20 * f11;
-                  float f23 = f20 * f12 - f21 * f11;
-                  float f24 = f18 * f10 + f22 * f9;
-                  float f25 = f22 * f10 - f18 * f9;
-                  int i16 = 0;
-                  int i17 = 255;
-                  double d = 20.0;
-                  float f26 = 5.0F;
+               for (int var87 = 0; var87 < 120; var87++) {
+                  float var88 = (var87 - 60) / 90.0F;
+                  float var89 = 1.0F;
+                  float var90 = var89 * var21 + var88 * var20;
+                  float var91 = var88 * var21 - var89 * var20;
+                  float var32 = var85 * var19 + var90 * var18;
+                  float var33 = var90 * var19 - var85 * var18;
+                  int var34 = 0;
+                  int var35 = 255;
+                  double var36 = 20.0;
+                  float var38 = 5.0F;
 
-                  for (int i18 = 0; i18 < 3; i18++) {
-                     float f27 = f24;
-                     if (i18 == 1) {
-                        f27 = f23;
+                  for (int var39 = 0; var39 < 3; var39++) {
+                     float var40 = var32;
+                     if (var39 == 1) {
+                        var40 = var91;
                      }
 
-                     if (i18 == 2) {
-                        f27 = f25;
+                     if (var39 == 2) {
+                        var40 = var33;
                      }
 
-                     float f28 = 1.0F / (f27 < 0.0F ? -f27 : f27);
-                     float f29 = f24 * f28;
-                     float f30 = f23 * f28;
-                     float f31 = f25 * f28;
-                     float f32 = f1 - (int)f1;
-                     if (i18 == 1) {
-                        f32 = f2 - (int)f2;
+                     float var41 = 1.0F / (var40 < 0.0F ? -var40 : var40);
+                     float var42 = var32 * var41;
+                     float var43 = var91 * var41;
+                     float var44 = var33 * var41;
+                     float var45 = var58 - (int)var58;
+                     if (var39 == 1) {
+                        var45 = var59 - (int)var59;
                      }
 
-                     if (i18 == 2) {
-                        f32 = f3 - (int)f3;
+                     if (var39 == 2) {
+                        var45 = var60 - (int)var60;
                      }
 
-                     if (f27 > 0.0F) {
-                        f32 = 1.0F - f32;
+                     if (var40 > 0.0F) {
+                        var45 = 1.0F - var45;
                      }
 
-                     float f33 = f28 * f32;
-                     float f34 = f1 + f29 * f32;
-                     float f35 = f2 + f30 * f32;
-                     float f36 = f3 + f31 * f32;
-                     if (f27 < 0.0F) {
-                        if (i18 == 0) {
-                           f34--;
+                     float var46 = var41 * var45;
+                     float var47 = var58 + var42 * var45;
+                     float var48 = var59 + var43 * var45;
+                     float var49 = var60 + var44 * var45;
+                     if (var40 < 0.0F) {
+                        if (var39 == 0) {
+                           var47--;
                         }
 
-                        if (i18 == 1) {
-                           f35--;
+                        if (var39 == 1) {
+                           var48--;
                         }
 
-                        if (i18 == 2) {
-                           f36--;
+                        if (var39 == 2) {
+                           var49--;
                         }
                      }
 
-                     while (f33 < d) {
-                        int i21 = (int)f34 - 64;
-                        int i22 = (int)f35 - 64;
-                        int i23 = (int)f36 - 64;
-                        if (i21 < 0 || i22 < 0 || i23 < 0 || i21 >= 64 || i22 >= 64 || i23 >= 64) {
+                     while (var46 < var36) {
+                        int var50 = (int)var47 - 64;
+                        int var51 = (int)var48 - 64;
+                        int var52 = (int)var49 - 64;
+                        if (var50 < 0 || var51 < 0 || var52 < 0 || var50 >= 64 || var51 >= 64 || var52 >= 64) {
                            break;
                         }
 
-                        int i24 = i21 + i22 * 64 + i23 * 4096;
-                        int i25 = arrayOfInt2[i24];
-                        if (i25 > 0) {
-                           i6 = (int)((f34 + f36) * 16.0F) & 15;
-                           i7 = ((int)(f35 * 16.0F) & 15) + 16;
-                           if (i18 == 1) {
-                              i6 = (int)(f34 * 16.0F) & 15;
-                              i7 = (int)(f36 * 16.0F) & 15;
-                              if (f30 < 0.0F) {
-                                 i7 += 32;
+                        int var53 = var50 + var51 * 64 + var52 * 4096;
+                        int var54 = var4[var53];
+                        if (var54 > 0) {
+                           var73 = (int)((var47 + var49) * 16.0F) & 15;
+                           var77 = ((int)(var48 * 16.0F) & 15) + 16;
+                           if (var39 == 1) {
+                              var73 = (int)(var47 * 16.0F) & 15;
+                              var77 = (int)(var49 * 16.0F) & 15;
+                              if (var43 < 0.0F) {
+                                 var77 += 32;
                               }
                            }
 
-                           int i26 = 16777215;
-                           if (i24 != i4 || i6 > 0 && i7 % 16 > 0 && i6 < 15 && i7 % 16 < 15) {
-                              i26 = arrayOfInt3[i6 + i7 * 16 + i25 * 256 * 3];
+                           int var55 = 16777215;
+                           if (var53 != var14 || var73 > 0 && var77 % 16 > 0 && var73 < 15 && var77 % 16 < 15) {
+                              var55 = var57[var73 + var77 * 16 + var54 * 256 * 3];
                            }
 
-                           if (f33 < f26 && i9 == this.M[2] / 4 && i11 == this.M[3] / 4) {
-                              i8x = i24;
-                              int var70 = 1;
-                              if (f27 > 0.0F) {
+                           if (var46 < var38 && var83 == this.M[2] / 4 && var87 == this.M[3] / 4) {
+                              var81 = var53;
+                              byte var70 = 1;
+                              if (var40 > 0.0F) {
                                  var70 = -1;
                               }
 
-                              i5 = var70 << 6 * i18;
-                              f26 = f33;
+                              var15 = var70 << 6 * var39;
+                              var38 = var46;
                            }
 
-                           if (i26 > 0) {
-                              i16 = i26;
-                              i17 = 255 - (int)(f33 / 20.0F * 255.0F);
-                              i17 = i17 * (255 - (i18 + 2) % 3 * 50) / 255;
-                              d = f33;
+                           if (var55 > 0) {
+                              var34 = var55;
+                              var35 = 255 - (int)(var46 / 20.0F * 255.0F);
+                              var35 = var35 * (255 - (var39 + 2) % 3 * 50) / 255;
+                              var36 = var46;
                            }
                         }
 
-                        f34 += f29;
-                        f35 += f30;
-                        f36 += f31;
-                        f33 += f28;
+                        var47 += var42;
+                        var48 += var43;
+                        var49 += var44;
+                        var46 += var41;
                      }
                   }
 
-                  int i18 = (i16 >> 16 & 0xFF) * i17 / 255;
-                  int i19 = (i16 >> 8 & 0xFF) * i17 / 255;
-                  int i20 = (i16 & 0xFF) * i17 / 255;
-                  arrayOfInt1[i9 + i11 * 214] = i18 << 16 | i19 << 8 | i20;
+                  int var93 = (var34 >> 16 & 0xFF) * var35 / 255;
+                  int var94 = (var34 >> 8 & 0xFF) * var35 / 255;
+                  int var95 = (var34 & 0xFF) * var35 / 255;
+                  var3[var83 + var87 * 214] = var93 << 16 | var94 << 8 | var95;
                }
             }
 
-            i4 = (int)i8x;
+            var14 = var81;
             Thread.sleep(2L);
             if (!this.isActive()) {
                return;
             }
 
-            this.getGraphics().drawImage(localBufferedImage, 0, 0, 856, 480, null);
+            this.getGraphics().drawImage(var2, 0, 0, 856, 480, null);
          }
       } catch (Exception var56) {
       }
    }
 
    @Override
-   public boolean handleEvent(Event paramEvent) {
-      int i = 0;
-      switch (paramEvent.id) {
+   public boolean handleEvent(Event var1) {
+      byte var2 = 0;
+      switch (var1.id) {
          case 401:
-            i = 1;
+            var2 = 1;
          case 402:
-            this.M[paramEvent.key] = i;
+            this.M[var1.key] = var2;
             break;
          case 501:
-            i = 1;
-            this.M[2] = paramEvent.x;
-            this.M[3] = paramEvent.y;
+            var2 = 1;
+            this.M[2] = var1.x;
+            this.M[3] = var1.y;
          case 502:
-            if ((paramEvent.modifiers & 4) > 0) {
-               this.M[1] = i;
+            if ((var1.modifiers & 4) > 0) {
+               this.M[1] = var2;
             } else {
-               this.M[0] = i;
+               this.M[0] = var2;
             }
             break;
          case 503:
          case 506:
-            this.M[2] = paramEvent.x;
-            this.M[3] = paramEvent.y;
+            this.M[2] = var1.x;
+            this.M[3] = var1.y;
             break;
          case 505:
             this.M[2] = 0;

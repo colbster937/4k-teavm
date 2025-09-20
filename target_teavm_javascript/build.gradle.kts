@@ -1,4 +1,3 @@
-import org.teavm.gradle.api.OptimizationLevel
 import java.nio.file.Files
 import java.nio.file.StandardOpenOption
 
@@ -22,21 +21,20 @@ sourceSets {
   }
 }
 
-val jsFolder = "../javascript"
+val jsFolder = "javascript"
 val jsFileName = "classes.js"
 
 teavm.js {
 	obfuscated = true
 	sourceMap = false
 	targetFileName = "../$jsFileName"
-	optimization = OptimizationLevel.AGGRESSIVE // Change to "AGGRESSIVE" for release
+	optimization = org.teavm.gradle.api.OptimizationLevel.AGGRESSIVE
 	outOfProcess = false
 	fastGlobalAnalysis = false
 	processMemory = 512
 	entryPointName.set("main")
 	mainClass = "dev.colbster937.eagler.Main"
 	outputDir = file(jsFolder)
-	properties = mapOf("java.util.TimeZone.autodetect" to "true")
 	debugInformation = false
 }
 
@@ -50,5 +48,7 @@ tasks.named("generateJavaScript") {
     html = html.replace("<style>", "<script>\n$js\n  </script>\n  <style>").replace("<script src=\"$jsFileName\"></script>\n  ", "")
 	
     Files.write(file("$jsFolder/Minecraft4k.html").toPath(), html.toByteArray(Charsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)
+
+    delete("$jsFolder/js")
   }
 }
