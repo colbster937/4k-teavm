@@ -12,7 +12,7 @@ if not exist "gradlew.bat" (
     )
 )
 
-call gradlew.bat :target_teavm_javascript:generateJavaScript
+call gradlew.bat :target_teavm_javascript:generateJavaScript %*
 set EXITCODE=%ERRORLEVEL%
 
 popd

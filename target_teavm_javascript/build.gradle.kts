@@ -23,19 +23,20 @@ sourceSets {
 
 val jsFolder = "javascript"
 val jsFileName = "classes.js"
+val debug = project.hasProperty("debug")
 
 teavm.js {
-	obfuscated = true
-	sourceMap = false
+	obfuscated = !debug
+	sourceMap = debug
 	targetFileName = "../$jsFileName"
-	optimization = org.teavm.gradle.api.OptimizationLevel.AGGRESSIVE
+	optimization = org.teavm.gradle.api.OptimizationLevel.valueOf(if (debug) "NONE" else "AGGRESSIVE")
 	outOfProcess = false
 	fastGlobalAnalysis = false
 	processMemory = 512
 	entryPointName.set("main")
 	mainClass = "dev.colbster937.eagler.Main"
 	outputDir = file(jsFolder)
-	debugInformation = false
+	debugInformation = debug
 }
 
 tasks.named("generateJavaScript") {
