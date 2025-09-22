@@ -3,12 +3,12 @@ import java.nio.file.StandardOpenOption
 
 plugins {
   java
-  id("org.teavm") version "0.12.1"
+  id("org.teavm") version "0.12.3"
 }
 
 dependencies {
   implementation(rootProject)
-  implementation("org.teavm:teavm-core:0.12.1")
+  implementation("org.teavm:teavm-core:0.12.3")
 }
 
 sourceSets {
@@ -17,6 +17,7 @@ sourceSets {
       "../src/main",
       "../src/game",
       "../src/teavm",
+      "../src/teavm_js",
     )
   }
 }
@@ -40,12 +41,19 @@ teavm.js {
 }
 
 tasks.named("generateJavaScript") {
+  doFirst {
+    delete("$jsFolder/$jsFileName")
+    delete("$jsFolder/$jsFileName.map")
+    delete("$jsFolder/$jsFileName.teavmdbg")
+    delete("$jsFolder/Minecraft4k.html")
+    delete("$jsFolder/js")
+  }
+
   doLast {
-    var html = file("$jsFolder/index.html").readText(Charsets.UTF_8)
     var js = file("$jsFolder/$jsFileName").readText(Charsets.UTF_8)
+    var html = file("$jsFolder/index.html").readText(Charsets.UTF_8)
 
     js = js.replace(Regex("""(?m)^//# sourceMappingURL=.*$"""), "")
-
     html = html.replace("<style>", "<script>\n$js\n  </script>\n  <style>").replace("<script src=\"$jsFileName\"></script>\n  ", "")
 	
     Files.write(file("$jsFolder/Minecraft4k.html").toPath(), html.toByteArray(Charsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)

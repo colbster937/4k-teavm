@@ -1,11 +1,13 @@
 package dev.colbster937.eagler;
 
+import dev.colbster937.eagler.Utils;
+
 import org.teavm.jso.JSBody;
 import org.teavm.jso.canvas.CanvasRenderingContext2D;
 import org.teavm.jso.dom.events.MouseEvent;
 import org.teavm.jso.dom.html.HTMLCanvasElement;
 
-public class Util {
+public class CanvasUtil {
   @JSBody(params = { "ctx", "v" }, script =
     "ctx.imageSmoothingEnabled = v;" +
     "if (ctx.mozImageSmoothingEnabled !== undefined) ctx.mozImageSmoothingEnabled = v;" +
@@ -17,9 +19,9 @@ public class Util {
     int cw = canvas.getWidth();
     int ch = canvas.getHeight();
 
-    double s  = Math.min(cw / 214.0, ch / 120.0);
-    int dw = (int) Math.round(214 * s);
-    int dh = (int) Math.round(120 * s);
+    double s = Math.min(cw / Utils.GAME_WIDTH, ch / Utils.GAME_HEIGHT);
+    int dw = (int) Math.round(Utils.GAME_WIDTH * s);
+    int dh = (int) Math.round(Utils.GAME_HEIGHT * s);
     int dx = (cw - dw) / 2;
     int dy = (ch - dh) / 2;
 
@@ -29,15 +31,28 @@ public class Util {
 
     double u = (offsetX - dx) / (double) dw;
     double v = (offsetY - dy) / (double) dh;
-    int mx = (int) Math.round(u * 856.0);
-    int my = (int) Math.round(v * 480.0);
+    int mx = (int) Math.round(u * Utils.RENDER_WIDTH);
+    int my = (int) Math.round(v * Utils.RENDER_HEIGHT);
 
-    if (mx < 0) mx = 0; else if (mx > 855) mx = 855;
-    if (my < 0) my = 0; else if (my > 479) my = 479;
+    if (mx < 0) mx = 0; else if (mx > Utils.RENDER_WIDTH - 1) mx = Utils.RENDER_WIDTH - 1;
+    if (my < 0) my = 0; else if (my > Utils.RENDER_HEIGHT) my = Utils.RENDER_HEIGHT - 1;
     return new int[] { mx, my };
   }
 
   public static int[] scaleMouse(HTMLCanvasElement canvas, MouseEvent e) {
     return scaleMouse(canvas, e.getOffsetX(), e.getOffsetY());
+  }
+
+  public static boolean[] isFixedSize(HTMLCanvasElement canvas) {
+    boolean[] result = new boolean[] { false, false };
+    if (canvas.getWidth() != 0) result[0] = true;
+    if (canvas.getHeight() != 0) result[1] = true;
+    return result;
+  }
+
+  public static boolean hasFixedSize(HTMLCanvasElement canvas) {
+    boolean[] result = isFixedSize(canvas);
+    if (result[0] || result[1]) return true;
+    else return false;
   }
 }

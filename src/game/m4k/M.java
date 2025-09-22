@@ -8,7 +8,7 @@ import dev.colbster937.java.awt.image.BufferedImage;
 import dev.colbster937.java.awt.image.DataBufferInt;
 
 public class M extends Applet implements Runnable {
-   public M(dev.colbster937.render.Canvas canvas, dev.colbster937.render.RenderContext ctx) {
+   public M(dev.colbster937.eagler.render.Canvas canvas, dev.colbster937.eagler.render.RenderContext ctx) {
       super(canvas, ctx);
    }
    

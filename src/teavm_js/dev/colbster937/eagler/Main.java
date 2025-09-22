@@ -8,8 +8,8 @@ import org.teavm.jso.dom.events.KeyboardEvent;
 import org.teavm.jso.dom.events.Event;
 import org.teavm.jso.dom.events.MouseEvent;
 
-import dev.colbster937.render.Canvas;
-import dev.colbster937.render.RenderContext;
+import dev.colbster937.eagler.render.Canvas;
+import dev.colbster937.eagler.render.RenderContext;
 
 import m4k.M;
 
@@ -20,6 +20,7 @@ public class Main {
   private static Canvas canvas;
   private static RenderContext ctx;
   private static int[] d;
+  private static boolean fs;
   
   private static String id = "game_frame";
 
@@ -27,33 +28,50 @@ public class Main {
     window = Window.current();
     doc = window.getDocument();
     HTMLElement node = doc.getElementById(id);
-    d = new int[3];
+    d = new int[2];
 
-    d[1] = window.getInnerWidth();
-    d[2] = window.getInnerHeight();
+    d[0] = Utils.RENDER_WIDTH;
+    d[1] = Utils.RENDER_HEIGHT;
 
     if (node == null) {
-      createCanvas(doc.getBody());
+      canvas = createCanvas(doc.getBody());
     } else if (!(node instanceof HTMLCanvasElement)) {
       node.removeAttribute("id");
-      createCanvas(node);
+      canvas = createCanvas(node);
+      if (node.hasAttribute("fullscreen")) {
+        node.removeAttribute("fullscreen");
+        canvas.setAttribute("fullscreen", "");
+      }
     } else {
       canvas = (Canvas) node;
-      if (canvas.getWidth() == 0) canvas.setWidth(d[1]); else d[1] = canvas.getWidth(); d[0] = 1;
-      if (canvas.getHeight() == 0) canvas.setHeight(d[2]); else d[2] = canvas.getHeight(); d[0] = 1;
+      boolean[] f = CanvasUtil.isFixedSize(canvas);
+      if (!f[0]) canvas.setWidth(d[0]);
+      else d[0] = canvas.getWidth();
+      if (!f[1]) canvas.setHeight(d[1]);
+      else d[1] = canvas.getHeight();
     }
 
     ctx = (RenderContext) canvas.getContext("2d");
 
+    if (canvas.hasAttribute("fullscreen")) {
+      d[0] = window.getInnerWidth();
+      d[1] = window.getInnerHeight();
+      canvas.setWidth(d[0]);
+      canvas.setHeight(d[1]);
+      CanvasUtil.setSmoothing(ctx, false);
+      fs = true;
+    } else {
+      resize();
+    }
+
     game = new M(canvas, ctx);
     game.start();
 
-    Util.setSmoothing(ctx, false);
     canvas.setTabIndex(0);
     canvas.focus();
 
     canvas.addEventListener("mousedown", (MouseEvent e) -> {
-      int[] p = Util.scaleMouse(canvas, e);
+      int[] p = CanvasUtil.scaleMouse(canvas, e);
       AwtEvent ev = new AwtEvent();
       ev.id = 501;
       ev.x = p[0];
@@ -64,7 +82,7 @@ public class Main {
     });
 
     canvas.addEventListener("mouseup", (MouseEvent e) -> {
-      int[] p = Util.scaleMouse(canvas, e);
+      int[] p = CanvasUtil.scaleMouse(canvas, e);
       AwtEvent ev = new AwtEvent();
       ev.id = 502;
       ev.x = p[0];
@@ -75,7 +93,7 @@ public class Main {
     });
 
     canvas.addEventListener("mousemove", (MouseEvent e) -> {
-      int[] p = Util.scaleMouse(canvas, e);
+      int[] p = CanvasUtil.scaleMouse(canvas, e);
       AwtEvent ev = new AwtEvent();
       ev.id = 503;
       ev.x = p[0];
@@ -114,13 +132,7 @@ public class Main {
     });
 
     window.addEventListener("resize", (Event e) -> {
-      if (d[0] > 0) return;
-      int nw = window.getInnerWidth();
-      int nh = window.getInnerHeight();
-      canvas.setWidth(nw);
-      canvas.setHeight(nh);
-      d[1] = nw;
-      d[2] = nh;
+      resize();
     });
 
     doc.addEventListener("click", (Event e) -> {
@@ -128,19 +140,35 @@ public class Main {
     });
   }
 
-  private static void createCanvas(HTMLElement parent) {
-    canvas = (Canvas) doc.createElement("canvas");
-    canvas.setId(id);
-    canvas.setWidth(d[1]);
-    canvas.setHeight(d[2]);
-    parent.appendChild(canvas);
+  private static Canvas createCanvas(HTMLElement parent) {
+    Canvas c = (Canvas) doc.createElement("canvas");
+    c.setId(id);
+    c.setWidth(d[0]);
+    c.setHeight(d[1]);
+    parent.appendChild(c);
+    return c;
+  }
+
+  private static void resize() {
+    boolean[] f = CanvasUtil.isFixedSize(canvas);
+    int nw = window.getInnerWidth();
+    int nh = window.getInnerHeight();
+    if (fs || !f[0] || nw < d[0]) {
+      canvas.setWidth(nw);
+      d[0] = nw;
+    }
+    if (fs || !f[1] || nh < d[1]) {
+      canvas.setHeight(nh);
+      d[1] = nh;
+    }
+    CanvasUtil.setSmoothing(ctx, false);
   }
 
   public static int getWidth() {
-    return d[1];
+    return d[0];
   }
 
   public static int getHeight() {
-    return d[2];
+    return d[1];
   }
 }

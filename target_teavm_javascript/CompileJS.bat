@@ -4,7 +4,6 @@ setlocal
 pushd "%~dp0.."
 
 if not exist "gradlew.bat" (
-    echo gradlew.bat not found. Running "gradle wrapper" to generate it...
     gradle wrapper
     if errorlevel 1 (
         popd
