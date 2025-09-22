@@ -19,8 +19,7 @@ public class Main {
   private static HTMLDocument doc;
   private static Canvas canvas;
   private static RenderContext ctx;
-  private static int w;
-  private static int h;
+  private static int[] d;
   
   private static String id = "game_frame";
 
@@ -28,9 +27,10 @@ public class Main {
     window = Window.current();
     doc = window.getDocument();
     HTMLElement node = doc.getElementById(id);
+    d = new int[3];
 
-    w = window.getInnerWidth();
-    h = window.getInnerHeight();
+    d[1] = window.getInnerWidth();
+    d[2] = window.getInnerHeight();
 
     if (node == null) {
       createCanvas(doc.getBody());
@@ -39,8 +39,8 @@ public class Main {
       createCanvas(node);
     } else {
       canvas = (Canvas) node;
-      canvas.setWidth(w);
-      canvas.setHeight(h);
+      if (canvas.getWidth() == 0) canvas.setWidth(d[1]); else d[1] = canvas.getWidth(); d[0] = 1;
+      if (canvas.getHeight() == 0) canvas.setHeight(d[2]); else d[2] = canvas.getHeight(); d[0] = 1;
     }
 
     ctx = (RenderContext) canvas.getContext("2d");
@@ -114,12 +114,13 @@ public class Main {
     });
 
     window.addEventListener("resize", (Event e) -> {
+      if (d[0] > 0) return;
       int nw = window.getInnerWidth();
       int nh = window.getInnerHeight();
       canvas.setWidth(nw);
       canvas.setHeight(nh);
-      w = nw;
-      h = nh;
+      d[1] = nw;
+      d[2] = nh;
     });
 
     doc.addEventListener("click", (Event e) -> {
@@ -130,16 +131,16 @@ public class Main {
   private static void createCanvas(HTMLElement parent) {
     canvas = (Canvas) doc.createElement("canvas");
     canvas.setId(id);
-    canvas.setWidth(w);
-    canvas.setHeight(h);
+    canvas.setWidth(d[1]);
+    canvas.setHeight(d[2]);
     parent.appendChild(canvas);
   }
 
   public static int getWidth() {
-    return w;
+    return d[1];
   }
 
   public static int getHeight() {
-    return h;
+    return d[2];
   }
 }
