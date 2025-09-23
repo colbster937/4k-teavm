@@ -8,6 +8,8 @@ import org.teavm.jso.dom.events.KeyboardEvent;
 import org.teavm.jso.dom.events.Event;
 import org.teavm.jso.dom.events.MouseEvent;
 
+import dev.colbster937.eagler.Utils;
+import dev.colbster937.eagler.AwtEvent;
 import dev.colbster937.eagler.render.Canvas;
 import dev.colbster937.eagler.render.RenderContext;
 
@@ -21,7 +23,7 @@ public class Main {
   private static RenderContext ctx;
   private static int[] d;
   private static boolean fs;
-  
+
   private static String id = "game_frame";
 
   public static void main(String[] args) {
@@ -30,8 +32,8 @@ public class Main {
     HTMLElement node = doc.getElementById(id);
     d = new int[2];
 
-    d[0] = Utils.RENDER_WIDTH;
-    d[1] = Utils.RENDER_HEIGHT;
+    d[0] = Utils.RENDER_SIZE[0];
+    d[1] = Utils.RENDER_SIZE[1];
 
     if (node == null) {
       canvas = createCanvas(doc.getBody());
@@ -44,22 +46,29 @@ public class Main {
       }
     } else {
       canvas = (Canvas) node;
-      boolean[] f = CanvasUtil.isFixedSize(canvas);
-      if (!f[0]) canvas.setWidth(d[0]);
-      else d[0] = canvas.getWidth();
-      if (!f[1]) canvas.setHeight(d[1]);
-      else d[1] = canvas.getHeight();
+      boolean[] f = CanvasUtils.isFixedSize(canvas);
+      if (!f[0])
+        canvas.setWidth(d[0]);
+      else
+        d[0] = canvas.getWidth();
+      if (!f[1])
+        canvas.setHeight(d[1]);
+      else
+        d[1] = canvas.getHeight();
     }
 
     ctx = (RenderContext) canvas.getContext("2d");
 
     if (canvas.hasAttribute("fullscreen")) {
+      canvas.removeAttribute("fullscreen");
       d[0] = window.getInnerWidth();
       d[1] = window.getInnerHeight();
       canvas.setWidth(d[0]);
       canvas.setHeight(d[1]);
-      CanvasUtil.setSmoothing(ctx, false);
+      CanvasUtils.setSmoothing(ctx, false);
+      doc.getBody().setAttribute("style", "margin:0;overflow:hidden;height:100vh;width:100vw;");
       fs = true;
+      Utils.FULLSCREEN_ALT = canvas.hasAttribute("fullscreen");
     } else {
       resize();
     }
@@ -68,10 +77,11 @@ public class Main {
     game.start();
 
     canvas.setTabIndex(0);
+    canvas.setAttribute("style", "outline:none;border:none;image-rendering:pixelated;");
     canvas.focus();
 
     canvas.addEventListener("mousedown", (MouseEvent e) -> {
-      int[] p = CanvasUtil.scaleMouse(canvas, e);
+      int[] p = CanvasUtils.scaleMouse(canvas, e);
       AwtEvent ev = new AwtEvent();
       ev.id = 501;
       ev.x = p[0];
@@ -82,7 +92,7 @@ public class Main {
     });
 
     canvas.addEventListener("mouseup", (MouseEvent e) -> {
-      int[] p = CanvasUtil.scaleMouse(canvas, e);
+      int[] p = CanvasUtils.scaleMouse(canvas, e);
       AwtEvent ev = new AwtEvent();
       ev.id = 502;
       ev.x = p[0];
@@ -93,7 +103,7 @@ public class Main {
     });
 
     canvas.addEventListener("mousemove", (MouseEvent e) -> {
-      int[] p = CanvasUtil.scaleMouse(canvas, e);
+      int[] p = CanvasUtils.scaleMouse(canvas, e);
       AwtEvent ev = new AwtEvent();
       ev.id = 503;
       ev.x = p[0];
@@ -114,9 +124,7 @@ public class Main {
     canvas.addEventListener("keydown", (KeyboardEvent e) -> {
       AwtEvent ev = new AwtEvent();
       ev.id = 401;
-      int code = e.getKeyCode();
-      if (code >= 65 && code <= 90) code += 32;
-      ev.key = code;
+      ev.key = Utils.keyUtoL(e.getKeyCode());
       game.handleEvent(ev);
       e.preventDefault();
     });
@@ -124,9 +132,7 @@ public class Main {
     canvas.addEventListener("keyup", (KeyboardEvent e) -> {
       AwtEvent ev = new AwtEvent();
       ev.id = 402;
-      int code = e.getKeyCode();
-      if (code >= 65 && code <= 90) code += 32;
-      ev.key = code;
+      ev.key = Utils.keyUtoL(e.getKeyCode());
       game.handleEvent(ev);
       e.preventDefault();
     });
@@ -150,7 +156,8 @@ public class Main {
   }
 
   private static void resize() {
-    boolean[] f = CanvasUtil.isFixedSize(canvas);
+    CanvasUtils.setSmoothing(ctx, false);
+    boolean[] f = CanvasUtils.isFixedSize(canvas);
     int nw = window.getInnerWidth();
     int nh = window.getInnerHeight();
     if (fs || !f[0] || nw < d[0]) {
@@ -161,10 +168,13 @@ public class Main {
       canvas.setHeight(nh);
       d[1] = nh;
     }
-    CanvasUtil.setSmoothing(ctx, false);
   }
 
-  public static int getWidth() { return d[0]; }
+  public static int getWidth() {
+    return d[0];
+  }
 
-  public static int getHeight() { return d[1]; }
+  public static int getHeight() {
+    return d[1];
+  }
 }

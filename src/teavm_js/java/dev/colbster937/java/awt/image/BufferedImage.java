@@ -7,7 +7,7 @@ import org.teavm.jso.dom.html.HTMLCanvasElement;
 import org.teavm.jso.typedarrays.Uint8ClampedArray;
 
 public class BufferedImage {
-  private int[] d;;
+  private int[] d;
   private HTMLCanvasElement backing;
   private CanvasRenderingContext2D bctx;
   private ImageData imgData;
