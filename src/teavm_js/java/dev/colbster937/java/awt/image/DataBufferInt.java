@@ -3,9 +3,9 @@ package dev.colbster937.java.awt.image;
 import org.teavm.jso.canvas.ImageData;
 
 public class DataBufferInt {
-  private final int[] data;
+  private int[] data;
   @SuppressWarnings("unused")
-  private final ImageData img;
+  private ImageData img;
 
   public DataBufferInt(int size, ImageData img) {
     this.data = new int[size];

@@ -1,4 +1,4 @@
-package m4k;
+package mc4k;
 
 import java.util.Random;
 

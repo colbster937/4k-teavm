@@ -39,9 +39,7 @@ public class CanvasUtil {
     return new int[] { mx, my };
   }
 
-  public static int[] scaleMouse(HTMLCanvasElement canvas, MouseEvent e) {
-    return scaleMouse(canvas, e.getOffsetX(), e.getOffsetY());
-  }
+  public static int[] scaleMouse(HTMLCanvasElement canvas, MouseEvent e) { return scaleMouse(canvas, e.getOffsetX(), e.getOffsetY()); }
 
   public static boolean[] isFixedSize(HTMLCanvasElement canvas) {
     boolean[] result = new boolean[] { false, false };

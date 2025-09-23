@@ -7,9 +7,9 @@ import dev.colbster937.eagler.Utils;
 import dev.colbster937.java.awt.image.BufferedImage;
 
 public class Graphics {
-  private final CanvasRenderingContext2D ctx;
+  private CanvasRenderingContext2D ctx;
   @SuppressWarnings("unused")
-  private final HTMLCanvasElement canvas;
+  private HTMLCanvasElement canvas;
 
   public Graphics(CanvasRenderingContext2D ctx, HTMLCanvasElement canvas) {
     this.ctx = ctx;

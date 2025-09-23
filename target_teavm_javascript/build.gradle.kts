@@ -14,10 +14,10 @@ dependencies {
 sourceSets {
   named("main") {
     java.srcDirs(
-      "../src/main",
-      "../src/game",
-      "../src/teavm",
-      "../src/teavm_js",
+      "../src/main/java",
+      "../src/game/java",
+      "../src/teavm/java",
+      "../src/teavm_js/java",
     )
   }
 }

@@ -7,15 +7,17 @@ import org.teavm.jso.dom.html.HTMLCanvasElement;
 import org.teavm.jso.typedarrays.Uint8ClampedArray;
 
 public class BufferedImage {
-  private final int w, h;
-  private final HTMLCanvasElement backing;
-  private final CanvasRenderingContext2D bctx;
-  private final ImageData imgData;
-  private final DataBufferInt buffer;
+  private int[] d;;
+  private HTMLCanvasElement backing;
+  private CanvasRenderingContext2D bctx;
+  private ImageData imgData;
+  private DataBufferInt buffer;
+  private WritableRaster raster;
 
   public BufferedImage(int w, int h, int type) {
-    this.w = w;
-    this.h = h;
+    this.d = new int[2];
+    this.d[0] = w;
+    this.d[1] = h;
     var doc = Window.current().getDocument();
     this.backing = (HTMLCanvasElement) doc.createElement("canvas");
     this.backing.setWidth(w);
@@ -23,12 +25,14 @@ public class BufferedImage {
     this.bctx = (CanvasRenderingContext2D) backing.getContext("2d");
     this.imgData = bctx.createImageData(w, h);
     this.buffer = new DataBufferInt(w * h, imgData);
+    this.raster = new WritableRaster(buffer);
   }
 
-  public int getWidth() { return w; }
-  public int getHeight() { return h; }
+  public int getWidth() { return d[0]; }
 
-  public WritableRaster getRaster() { return new WritableRaster(buffer); }
+  public int getHeight() { return d[1]; }
+
+  public WritableRaster getRaster() { return raster; }
 
   public void flushToCanvas() {
     Uint8ClampedArray px = imgData.getData();
