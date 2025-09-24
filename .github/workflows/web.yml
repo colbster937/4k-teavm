@@ -46,7 +46,8 @@ jobs:
           mkdir dist
           zip -r dist/javascript.zip target_teavm_javascript/javascript
           cp target_teavm_javascript/javascript/Minecraft4k.html dist/Minecraft4k.html
-          cp target_teavm_javascript/javascript/Minecraft4k_alt.html dist/Minecraft4k_alt.html
+          cp target_teavm_javascript/javascript/Minecraft4k_alt1.html dist/Minecraft4k_alt1.html
+          cp target_teavm_javascript/javascript/Minecraft4k_alt2.html dist/Minecraft4k_alt2.html
 
       - name: Get short commit hash
         id: vars

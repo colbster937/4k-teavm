@@ -65,10 +65,12 @@ public class Main {
       d[1] = window.getInnerHeight();
       canvas.setWidth(d[0]);
       canvas.setHeight(d[1]);
-      CanvasUtils.setSmoothing(ctx, false);
       doc.getBody().setAttribute("style", "margin:0;overflow:hidden;height:100vh;width:100vw;");
       fs = true;
-      Utils.FULLSCREEN_ALT = canvas.hasAttribute("fullscreen");
+      Utils.FULLSCREEN_ALT = canvas.hasAttribute("fullscreen-alt");
+      if (Utils.FULLSCREEN_ALT) {
+        canvas.removeAttribute("fullscreen-alt");
+      }
     } else {
       resize();
     }
@@ -156,7 +158,6 @@ public class Main {
   }
 
   private static void resize() {
-    CanvasUtils.setSmoothing(ctx, false);
     boolean[] f = CanvasUtils.isFixedSize(canvas);
     int nw = window.getInnerWidth();
     int nh = window.getInnerHeight();

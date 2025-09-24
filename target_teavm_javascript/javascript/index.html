@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <script src="classes.js"></script>
-  <title>Minecraft 4k</title>
-  <script>
-    window.addEventListener('load', () => {
-      main();
-    });
-  </script>
-</head>
-<body id="game_frame" fullscreen>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="classes.js"></script>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" type="image/png" href="icon.png" />
+    <meta property="og:title" content="Minecraft 4k" />
+    <meta property="og:locale" content="en-US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/icon.png" />
+    <meta
+      property="og:description"
+      content="Minecraft 4k in the browser, using TeaVM!"
+    />
+    <title>Minecraft 4k</title>
+    <script>
+      window.addEventListener("load", () => {
+        main();
+      });
+    </script>
+  </head>
+  <body>
+    <canvas id="game_frame" fullscreen></canvas>
+  </body>
 </html>

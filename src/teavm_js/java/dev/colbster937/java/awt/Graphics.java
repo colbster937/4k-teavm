@@ -30,6 +30,7 @@ public class Graphics {
       ctx.clearRect(0, 0, cw, ch);
     }
     img.flushToCanvas();
+    CanvasUtils.setSmoothing(ctx, false);
     ctx.drawImage(img.backingCanvas(), x, y, w, h);
   }
 }
