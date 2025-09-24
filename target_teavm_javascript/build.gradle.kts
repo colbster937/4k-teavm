@@ -82,5 +82,5 @@ tasks.named("generateJavaScript") {
 }
 
 fun toOffline(html: String, js: String, icon: String): String {
-  return html.replace("</title>", "</title>\n  <script>\n$js\n  </script>").replace("<script src=\"$jsFileName\"></script>\n  ", "").replace("<link rel=\"manifest\" href=\"manifest.json\" />\n  ", "").replace("<link rel=\"manifest\" href=\"manifest_alt1.json\" />\n  ", "").replace("<link rel=\"manifest\" href=\"manifest_alt2.json\" />\n  ", "").replace("<meta property=\"og:image\" content=\"icon.png\" />\n  ", "").replace("icon.png", icon)
+  return html.replace("</title>", "</title>\n  <script>\n$js\n  </script>").replace("<script src=\"$jsFileName\"></script>\n  ", "").replace("<link rel=\"manifest\" href=\"manifest.json\" />\n  ", "").replace("<link rel=\"manifest\" href=\"manifest_alt1.json\" />\n  ", "").replace("<link rel=\"manifest\" href=\"manifest_alt2.json\" />\n  ", "").replace("<meta property=\"og:image\" content=\"/icon.png\" />\n  ", "").replace("icon.png", icon)
 }
