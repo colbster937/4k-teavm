@@ -1,0 +1,17 @@
+{
+  "name": "Minecraft 4k (Alt #2)",
+  "short_name": "4k 2",
+  "description": "Minecraft 4k in the browser, using TeaVM!",
+  "start_url": "index_alt2.html",
+  "display_override": ["fullscreen", "minimal-ui"],
+  "display": "standalone",
+  "background_color": "#009933",
+  "theme_color": "#009933",
+  "icons": [
+    {
+      "src": "icon.png",
+      "type": "image/png",
+      "sizes": "300x300"
+    }
+  ]
+}
