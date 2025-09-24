@@ -2,7 +2,7 @@
   "name": "Minecraft 4k (Alt #1)",
   "short_name": "4k 1",
   "description": "Minecraft 4k in the browser, using TeaVM!",
-  "start_url": "index_alt1.html",
+  "start_url": "alt1.html",
   "display_override": ["fullscreen", "minimal-ui"],
   "display": "standalone",
   "background_color": "#009933",
