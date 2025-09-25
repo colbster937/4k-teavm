@@ -1,5 +1,9 @@
 **/.DS_Store
 **/.gradle
+**/.vscode
+**/.idea
+**/out
+**/target
 **/build
 **/bin
 **/gradle
