@@ -105,20 +105,16 @@ public class Main {
     });
 
     canvas.addEventListener("mousemove", (MouseEvent e) -> {
-      int[] p = CanvasUtils.scaleMouse(canvas, e);
-      AwtEvent ev = new AwtEvent();
-      ev.id = 503;
-      ev.x = p[0];
-      ev.y = p[1];
-      game.handleEvent(ev);
+      if (e.getButtons() > 0) {
+        int[] p = CanvasUtils.scaleMouse(canvas, e);
+        AwtEvent ev = new AwtEvent();
+        ev.id = 506;
+        ev.x = p[0];
+        ev.y = p[1];
+        game.handleEvent(ev);
+      }
     });
-
-    canvas.addEventListener("mouseleave", (MouseEvent e) -> {
-      AwtEvent ev = new AwtEvent();
-      ev.id = 505;
-      game.handleEvent(ev);
-    });
-
+    
     canvas.addEventListener("contextmenu", (Event e) -> {
       e.preventDefault();
     });

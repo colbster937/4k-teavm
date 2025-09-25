@@ -1,8 +1,8 @@
 package dev.colbster937.eagler;
 
 public class Utils {
-  public static int[] GAME_SIZE = new int[] { 214, 120 };
-  public static int[] RENDER_SIZE = new int[] { 856, 480 };
+  public static int[] GAME_SIZE = new int[] { 160, 120 };
+  public static int[] RENDER_SIZE = new int[] { 640, 480 };
   public static boolean FULLSCREEN_ALT = false;
 
   public static int[] scaleMouse(int cw, int ch, int ox, int oy) {

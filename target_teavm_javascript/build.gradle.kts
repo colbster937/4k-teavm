@@ -57,10 +57,10 @@ tasks.named("generateJavaScript") {
     var js = file("$jsFolder/$jsFileName").readText(Charsets.UTF_8)
     var html = file("$jsFolder/index.html").readText(Charsets.UTF_8)
     var html_alt1 = html.replace("fullscreen", "fullscreen fullscreen-alt").replace("manifest.json", "manifest_alt1.json")
-    var html_alt2 = html.replace("<body>", "<body style=\"display:flex;flex-direction:column;align-items:center;\">\n  <h1>Minecraft 4k</h1>").replace("fullscreen", "width=\"856\" height=\"480\"").replace("manifest.json", "manifest_alt2.json")
+    var html_alt2 = html.replace("<body>", "<body style=\"display:flex;flex-direction:column;align-items:center;\">\n  <h1>Minecraft 4k</h1>").replace("fullscreen", "width=\"640\" height=\"480\"").replace("manifest.json", "manifest_alt2.json")
     var manifest = file("$jsFolder/manifest.json").readText(Charsets.UTF_8)
-    var manifest_alt1 = manifest.replace("index.html", "alt1.html").replaceFirst("4k", "4-k (Alt #1)").replaceFirst("4k", "4k 1").replaceFirst("4-k", "4k")
-    var manifest_alt2 = manifest.replace("index.html", "alt2.html").replaceFirst("4k", "4-k (Alt #2)").replaceFirst("4k", "4k 2").replaceFirst("4-k", "4k")
+    var manifest_alt1 = manifest.replace("index.html", "alt1.html").replaceFirst("4k-1", "4-k-1 (Alt #1)").replaceFirst("4k-1", "4k-1-1").replaceFirst("4-k-1", "4k-1")
+    var manifest_alt2 = manifest.replace("index.html", "alt2.html").replaceFirst("4k-1", "4-k-1 (Alt #2)").replaceFirst("4k-1", "4k-1-2").replaceFirst("4-k-1", "4k-1")
     var icon = "data:image/png;base64," + Base64.getEncoder().encodeToString(file("$jsFolder/icon.png").readBytes())
 
     Files.write(file("$jsFolder/alt1.html").toPath(), html_alt1.toByteArray(Charsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)

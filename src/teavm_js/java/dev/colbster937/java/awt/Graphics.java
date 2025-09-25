@@ -22,7 +22,7 @@ public class Graphics {
       int cw = canvas.getWidth();
       int ch = canvas.getHeight();
       double[] t = new double[] { cw / (double) Utils.GAME_SIZE[0], ch / (double) Utils.GAME_SIZE[1] };
-      double s = Utils.FULLSCREEN_ALT ? Math.min(t[0], t[1]) : Math.max(t[0], t[1]);
+      double s = !Utils.FULLSCREEN_ALT ? Math.min(t[0], t[1]) : Math.max(t[0], t[1]);
       w = (int) Math.round(Utils.GAME_SIZE[0] * s);
       h = (int) Math.round(Utils.GAME_SIZE[1] * s);
       x = (cw - w) / 2;

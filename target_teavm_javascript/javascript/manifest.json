@@ -1,7 +1,7 @@
 {
-  "name": "Minecraft 4k",
-  "short_name": "4k",
-  "description": "Minecraft 4k in the browser, using TeaVM!",
+  "name": "Minecraft 4k-1",
+  "short_name": "4k-1",
+  "description": "Minecraft 4k-1 in the browser, using TeaVM!",
   "start_url": "index.html",
   "display_override": ["fullscreen", "minimal-ui"],
   "display": "standalone",
