@@ -34,6 +34,7 @@ jobs:
         run: |
           cd target_teavm_javascript
           ./CompileJS.sh
+          ./CopyAltFolder.sh
 
       - name: Upload JavaScript build
         uses: actions/upload-artifact@v4.6.2
@@ -41,10 +42,17 @@ jobs:
           name: javascript
           path: target_teavm_javascript/javascript
 
+      - name: Upload JavaScript alt build
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: javascript_alt
+          path: target_teavm_javascript/javascript_alt
+
       - name: Archive build
         run: |
           mkdir dist
           zip -r dist/javascript.zip target_teavm_javascript/javascript
+          zip -r dist/javascript_alt.zip target_teavm_javascript/javascript_alt
           cp target_teavm_javascript/javascript/Minecraft4k.html dist/Minecraft4k.html
           cp target_teavm_javascript/javascript/Minecraft4k_alt1.html dist/Minecraft4k_alt1.html
           cp target_teavm_javascript/javascript/Minecraft4k_alt2.html dist/Minecraft4k_alt2.html
