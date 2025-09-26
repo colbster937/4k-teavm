@@ -1,7 +1,5 @@
 package dev.colbster937.eagler;
 
-import dev.colbster937.eagler.Utils;
-
 import org.teavm.jso.JSBody;
 import org.teavm.jso.canvas.CanvasRenderingContext2D;
 import org.teavm.jso.dom.events.MouseEvent;

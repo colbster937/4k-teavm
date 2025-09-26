@@ -6,7 +6,7 @@ public class Utils {
   public static boolean FULLSCREEN_ALT = false;
 
   public static int[] scaleMouse(int cw, int ch, int ox, int oy) {
-    double s = Math.min(cw / GAME_SIZE[0], ch / GAME_SIZE[1]);
+    double s = FULLSCREEN_ALT ? Math.min(cw / GAME_SIZE[0], ch / GAME_SIZE[1]) : Math.max(cw / GAME_SIZE[0], ch / GAME_SIZE[1]);
     int dw = (int) Math.round(GAME_SIZE[0] * s);
     int dh = (int) Math.round(GAME_SIZE[1] * s);
     int dx = (cw - dw) / 2;
