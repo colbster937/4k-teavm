@@ -62,8 +62,6 @@ jobs:
           zip -r ../../dist/javascript_alt.zip .
           cd ../..
           cp target_teavm_javascript/javascript/Minecraft4k.html dist/Minecraft4k.html
-          cp target_teavm_javascript/javascript/Minecraft4k_alt1.html dist/Minecraft4k_alt1.html
-          cp target_teavm_javascript/javascript/Minecraft4k_alt2.html dist/Minecraft4k_alt2.html
           cp -r target_teavm_javascript/javascript javascript
           cp target_awt_desktop/dist/Minecraft4k.jar javascript/Minecraft4k.jar
           cp target_awt_desktop/dist/Minecraft4k.jar dist/Minecraft4k.jar
