@@ -1,0 +1,18 @@
+{
+  "formatVersion": 1,
+  "mainClass": "dev.colbster937.eagler.Main",
+  "mainJar": {
+    "downloads": {
+      "artifact": {
+        "sha1": "",
+        "size": 0,
+        "url": "https://4k-teavm.pages.dev/Minecraft4k.jar"
+      }
+    },
+    "name": "4k:4k:1"
+  },
+  "compatibleJavaMajors": [17, 21],
+  "name": "Minecraft4k",
+  "version": "4k",
+  "uid": "4k"
+}

@@ -61,23 +61,27 @@ tasks.named("generateJavaScript") {
     var manifest = file("$jsFolder/manifest.json").readText(Charsets.UTF_8)
     var manifest_alt1 = manifest.replace("index.html", "alt1.html").replaceFirst("4k", "4-k (Alt #1)").replaceFirst("4k", "4k 1").replaceFirst("4-k", "4k")
     var manifest_alt2 = manifest.replace("index.html", "alt2.html").replaceFirst("4k", "4-k (Alt #2)").replaceFirst("4k", "4k 2").replaceFirst("4-k", "4k")
-    var icon = "data:image/png;base64," + Base64.getEncoder().encodeToString(file("$jsFolder/icon.png").readBytes())
+    var icon = file("../src/main/resources/icon.png").readBytes()
+    var icon_uri = "data:image/png;base64," + Base64.getEncoder().encodeToString(icon)
 
+    Files.write(file("$jsFolder/icon.png").toPath(), icon, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)
     Files.write(file("$jsFolder/alt1.html").toPath(), html_alt1.toByteArray(Charsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)
     Files.write(file("$jsFolder/alt2.html").toPath(), html_alt2.toByteArray(Charsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)
     Files.write(file("$jsFolder/manifest_alt1.json").toPath(), manifest_alt1.toByteArray(Charsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)
     Files.write(file("$jsFolder/manifest_alt2.json").toPath(), manifest_alt2.toByteArray(Charsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)
 
     js = js.replace(Regex("""(?m)^//# sourceMappingURL=.*$"""), "")
-    html = toOffline(html, js, icon)
-    html_alt1 = toOffline(html_alt1, js, icon)
-    html_alt2 = toOffline(html_alt2, js, icon)
+    html = toOffline(html, js, icon_uri)
+    html_alt1 = toOffline(html_alt1, js, icon_uri)
+    html_alt2 = toOffline(html_alt2, js, icon_uri)
 
     Files.write(file("$jsFolder/Minecraft4k.html").toPath(), html.toByteArray(Charsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)
     Files.write(file("$jsFolder/Minecraft4k_alt1.html").toPath(), html_alt1.toByteArray(Charsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)
     Files.write(file("$jsFolder/Minecraft4k_alt2.html").toPath(), html_alt2.toByteArray(Charsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)
 
     delete("$jsFolder/js")
+    delete("build")
+    delete("bin")
   }
 }
 

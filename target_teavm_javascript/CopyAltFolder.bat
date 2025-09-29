@@ -1,7 +1,5 @@
 @echo off
-if exist javascript_alt (
-    rmdir /s /q javascript_alt
-)
+if exist javascript_alt rmdir /s /q javascript_alt
 mkdir javascript_alt
 copy /y javascript\alt2.html javascript_alt\index.html
 copy /y javascript\index.html javascript_alt\alt1.html

@@ -30,13 +30,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Build web client
+      - name: Build JavaScript client
         run: |
           cd target_teavm_javascript
           ./CompileJS.sh
           ./CopyAltFolder.sh
 
-      - name: Build awt client
+      - name: Build AWT client
         run: |
           cd target_awt_desktop
           ./CompileJar.sh
@@ -47,29 +47,27 @@ jobs:
           name: javascript
           path: target_teavm_javascript/javascript
 
-      - name: Upload JavaScript alt build
-        uses: actions/upload-artifact@v4.6.2
-        with:
-          name: javascript_alt
-          path: target_teavm_javascript/javascript_alt
-
-      - name: Upload awt build
+      - name: Upload AWT build
         uses: actions/upload-artifact@v4.6.2
         with:
           name: Minecraft4k
-          path: target_awt_desktop/build/libs
+          path: target_awt_desktop/dist/Minecraft4k.jar
 
       - name: Archive build
         run: |
           mkdir dist
-          zip -r dist/javascript.zip target_teavm_javascript/javascript
-          zip -r dist/javascript_alt.zip target_teavm_javascript/javascript_alt
+          cd target_teavm_javascript/javascript
+          zip -r ../../dist/javascript.zip .
+          cd ../javascript_alt
+          zip -r ../../dist/javascript_alt.zip .
+          cd ../..
           cp target_teavm_javascript/javascript/Minecraft4k.html dist/Minecraft4k.html
           cp target_teavm_javascript/javascript/Minecraft4k_alt1.html dist/Minecraft4k_alt1.html
           cp target_teavm_javascript/javascript/Minecraft4k_alt2.html dist/Minecraft4k_alt2.html
-          cp target_awt_desktop/build/libs/Minecraft4k.jar dist/Minecraft4k.jar
           cp -r target_teavm_javascript/javascript javascript
-          cp target_awt_desktop/build/libs/Minecraft4k.jar javascript/Minecraft4k.jar
+          cp target_awt_desktop/dist/Minecraft4k.jar javascript/Minecraft4k.jar
+          cp target_awt_desktop/dist/Minecraft4k.jar dist/Minecraft4k.jar
+          cp target_awt_desktop/dist/mmc_instance.zip dist/mmc_instance.zip
 
       - name: Get short commit hash
         id: vars
