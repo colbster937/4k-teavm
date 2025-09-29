@@ -70,15 +70,42 @@ public class Applet extends JFrame {
   }
 
   public void setArgs(String[] args) {
-    for (String arg : args) {
-      if (arg.startsWith("--mode")) {
-        String mode = arg.split("=")[1];
-        if (mode.equals("fullscreen")) {
-          Utils.FULLSCREEN_ALT = false;
-        } else if (mode.equals("border")) {
-          Utils.FULLSCREEN_ALT = true;
-        }
+    for (int i = 0; i < args.length; i++) {
+      String arg = args[i];
+      String value = null;
+
+      while (arg.startsWith("-")) arg = arg.substring(1);
+
+      if (arg.contains("=")) {
+        String[] split = arg.split("=", 2);
+        arg = split[0];
+        value = split[1];
+      } else if (i + 1 < args.length) {
+        value = args[++i];
       }
+
+      if (arg.equals("mode")) {
+        if (value != null) {
+          if (value.equals("fullscreen")) {
+            Utils.FULLSCREEN_ALT = false;
+          } else if (value.equals("bordered")) {
+            Utils.FULLSCREEN_ALT = true;
+          }
+        }
+      } else if (arg.equals("width")) {
+        this.setSize(getInt(value, Utils.RENDER_SIZE[0]), this.getHeight());
+      } else if (arg.equals("height")) {
+        this.setSize(this.getWidth(), getInt(value, Utils.RENDER_SIZE[1]));
+      }
+    }
+    setLocationRelativeTo(null);
+  }
+
+  private int getInt(String s, int d) {
+    try {
+      return Integer.parseInt(s);
+    } catch (Exception e) {
+      return d;
     }
   }
 
