@@ -2,6 +2,7 @@ import java.nio.file.Files
 import java.nio.file.StandardOpenOption
 
 plugins {
+  id("application")
   java
 }
 
@@ -20,6 +21,10 @@ sourceSets {
 			"../src/main/resources"
 		)
   }
+}
+
+application {
+  mainClass = "dev.colbster937.eagler.Main"
 }
 
 val jarName = "Minecraft4k"
