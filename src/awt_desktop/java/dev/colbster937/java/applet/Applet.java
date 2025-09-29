@@ -35,7 +35,6 @@ public class Applet extends JFrame {
     for (String arg : args) {
       if (arg.startsWith("--mode")) {
         String mode = arg.split("=")[1];
-        System.out.println(mode);
         if (mode.equals("fullscreen")) {
           Utils.FULLSCREEN_ALT = false;
         } else if (mode.equals("border")) {
