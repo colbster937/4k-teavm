@@ -88,5 +88,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: target_teavm_javascript/javascript
+          publish_dir: javascript
           publish_branch: gh-pages
