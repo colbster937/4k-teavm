@@ -6,6 +6,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.BufferStrategy;
 import java.io.InputStream;
 
 import dev.colbster937.eagler.Utils;
@@ -14,10 +16,10 @@ import dev.colbster937.eagler.render.RenderContext;
 import dev.colbster937.java.awt.Event;
 import dev.colbster937.java.awt.Graphics;
 import dev.colbster937.java.awt.jCanvas;
-import dev.colbster937.java.awt.image.BufferedImage;
 
 public class Applet extends JFrame {
   public jCanvas canvas;
+  public BufferStrategy bs;
 
   public Applet() {
     super(Utils.NAME);
@@ -25,16 +27,18 @@ public class Applet extends JFrame {
     setSize(Utils.RENDER_SIZE[0], Utils.RENDER_SIZE[1]);
     setLayout(new BorderLayout());
     setBackground(Color.BLACK);
-    canvas = new jCanvas();
-    canvas.setSize(Utils.RENDER_SIZE[0], Utils.RENDER_SIZE[1]);
-    add(canvas, BorderLayout.CENTER);
     setLocationRelativeTo(null);
     setVisible(true);
     setIgnoreRepaint(true);
+    canvas = new jCanvas();
+    canvas.setSize(Utils.RENDER_SIZE[0], Utils.RENDER_SIZE[1]);
+    canvas.setIgnoreRepaint(true);
+    add(canvas, BorderLayout.CENTER);
     canvas.setFocusable(true);
     canvas.requestFocus();
-    Image icon = loadImage("/icon.png");
-    setIconImage(icon);
+    canvas.createBufferStrategy(2);
+    bs = canvas.getBufferStrategy();
+    setIconImage(loadImage("/icon.png"));
   }
 
   public Image loadImage(String name) {
@@ -84,9 +88,19 @@ public class Applet extends JFrame {
 
   public boolean isActive() { return true; }
 
+  boolean b = false;
+
   public Graphics getGraphics() {
-    return new Graphics((Graphics2D) canvas.getGraphics(), canvas);
+    if (b) {
+      try { bs.show(); } finally { Toolkit.getDefaultToolkit().sync(); }
+      b = false;
+    }
+    b = true;
+    return new Graphics((Graphics2D) bs.getDrawGraphics(), canvas);
   }
+
+  public void present() {
+    try { bs.show(); } finally { Toolkit.getDefaultToolkit().sync(); }  }
 
   public Applet(Canvas c, RenderContext ctx) {
     this();
