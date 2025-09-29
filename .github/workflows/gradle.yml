@@ -68,8 +68,8 @@ jobs:
           cp target_teavm_javascript/javascript/Minecraft4k_alt1.html dist/Minecraft4k_alt1.html
           cp target_teavm_javascript/javascript/Minecraft4k_alt2.html dist/Minecraft4k_alt2.html
           cp target_awt_desktop/build/libs/Minecraft4k.jar dist/Minecraft4k.jar
-          cp target_teavm_javascript/javascript javascript
-          cp -r target_awt_desktop/build/libs/Minecraft4k.jar javascript/Minecraft4k.jar
+          cp -r target_teavm_javascript/javascript javascript
+          cp target_awt_desktop/build/libs/Minecraft4k.jar javascript/Minecraft4k.jar
 
       - name: Get short commit hash
         id: vars
