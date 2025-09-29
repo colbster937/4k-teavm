@@ -2,7 +2,7 @@ name: Build and Upload Client
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
   workflow_dispatch:
 
@@ -68,11 +68,12 @@ jobs:
           cp target_teavm_javascript/javascript/Minecraft4k_alt1.html dist/Minecraft4k_alt1.html
           cp target_teavm_javascript/javascript/Minecraft4k_alt2.html dist/Minecraft4k_alt2.html
           cp target_awt_desktop/build/libs/Minecraft4k.jar dist/Minecraft4k.jar
+          cp target_teavm_javascript/javascript javascript
+          cp target_awt_desktop/build/libs/Minecraft4k.jar javascript/Minecraft4k.jar
 
       - name: Get short commit hash
         id: vars
         run: echo "hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2.3.2
@@ -82,7 +83,7 @@ jobs:
           files: dist/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
