@@ -8,8 +8,6 @@ import org.teavm.jso.dom.events.KeyboardEvent;
 import org.teavm.jso.dom.events.Event;
 import org.teavm.jso.dom.events.MouseEvent;
 
-import dev.colbster937.eagler.Utils;
-import dev.colbster937.eagler.AwtEvent;
 import dev.colbster937.eagler.render.Canvas;
 import dev.colbster937.eagler.render.RenderContext;
 
@@ -107,7 +105,7 @@ public class Main {
     canvas.addEventListener("mousemove", (MouseEvent e) -> {
       int[] p = CanvasUtils.scaleMouse(canvas, e);
       AwtEvent ev = new AwtEvent();
-      ev.id = 503;
+      ev.id = e.getButtons() <= 0 ? 503 : 506;
       ev.x = p[0];
       ev.y = p[1];
       game.handleEvent(ev);

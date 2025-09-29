@@ -30,11 +30,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Build client
+      - name: Build web client
         run: |
           cd target_teavm_javascript
           ./CompileJS.sh
           ./CopyAltFolder.sh
+
+      - name: Build awt client
+        run: |
+          cd target_awt_desktop
+          ./CompileJar.sh
 
       - name: Upload JavaScript build
         uses: actions/upload-artifact@v4.6.2
@@ -48,6 +53,12 @@ jobs:
           name: javascript_alt
           path: target_teavm_javascript/javascript_alt
 
+      - name: Upload awt build
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: Minecraft4k
+          path: target_awt_desktop/build/libs
+
       - name: Archive build
         run: |
           mkdir dist
@@ -56,6 +67,7 @@ jobs:
           cp target_teavm_javascript/javascript/Minecraft4k.html dist/Minecraft4k.html
           cp target_teavm_javascript/javascript/Minecraft4k_alt1.html dist/Minecraft4k_alt1.html
           cp target_teavm_javascript/javascript/Minecraft4k_alt2.html dist/Minecraft4k_alt2.html
+          cp target_awt_desktop/build/libs/Minecraft4k.jar dist/Minecraft4k.jar
 
       - name: Get short commit hash
         id: vars

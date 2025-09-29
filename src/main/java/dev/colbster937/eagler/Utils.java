@@ -1,6 +1,8 @@
 package dev.colbster937.eagler;
 
 public class Utils {
+  public static String NAME = "Minecraft 4k";
+  public static String NAME_SHORT = "4k";
   public static int[] GAME_SIZE = new int[] { 214, 120 };
   public static int[] RENDER_SIZE = new int[] { 856, 480 };
   public static boolean FULLSCREEN_ALT = false;

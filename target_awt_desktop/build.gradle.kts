@@ -18,6 +18,7 @@ sourceSets {
 
 tasks.jar {
   manifest {
+    archiveBaseName.set("Minecraft4k")
     attributes["Main-Class"] = "dev.colbster937.eagler.Main"
   }
 }
