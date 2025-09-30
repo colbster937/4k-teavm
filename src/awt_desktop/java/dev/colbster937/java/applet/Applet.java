@@ -118,6 +118,7 @@ public class Applet extends JFrame {
   boolean b = false;
 
   public Graphics getGraphics() {
+    if (bs == null) return new Graphics((Graphics2D) canvas.getGraphics(), canvas);
     if (b) {
       try { bs.show(); } finally { Toolkit.getDefaultToolkit().sync(); }
       b = false;
