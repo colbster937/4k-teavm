@@ -5,7 +5,7 @@ import java.awt.image.WritableRaster;
 import java.util.Hashtable;
 
 public class jBufferedImage extends java.awt.image.BufferedImage {
-    public jBufferedImage(ColorModel cm, WritableRaster raster, boolean isRasterPremultiplied, Hashtable<?, ?> properties) {
-        super(cm, raster, isRasterPremultiplied, properties);
-    }
+  public jBufferedImage(ColorModel cm, WritableRaster raster, boolean isRasterPremultiplied, Hashtable<?, ?> properties) {
+    super(cm, raster, isRasterPremultiplied, properties);
+  }
 }
